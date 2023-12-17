@@ -59,8 +59,8 @@
        <!-- menu samping -->
        <div class="navbar-default sidebar" role="navigation">
          <div class="sidebar-nav navbar-collapse">
-           <ul class="nav" id="side-menu">
-             <li>
+         <ul class="nav" id="side-menu">
+            <li>
                <a href="?m=awal.php">
                  <i class="fa fa-dashboard"></i> Beranda
                </a>
@@ -90,19 +90,24 @@
                  <i class="fa fa-archive"></i> Data Barang
                </a>
              </li>
-
              <li>
                <a href="?m=barangKeluar&s=awal">
                  <i class="fa fa-cart-arrow-down"></i> Data Barang Keluar
                </a>
              </li>
              <li>
-               <a href="logout.php" onclick="return confirm('yakin ingin logout?')">
-                 <i class="fa fa-warning"></i> Logout
-               </a>
-             </li>
+              <a href="?m=barangMasuk&s=awal">
+                <i class="fa fa-cart-arrow-down"></i> Data Laporan
+              </a>
+            </li>
 
-           </ul>
+              <li>
+                <a href="logout.php">
+                  <i class="fa fa-warning"></i> Logout
+                </a>
+              </li>
+              
+            </ul>
          </div>
        </div>
 

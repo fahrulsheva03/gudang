@@ -63,47 +63,48 @@
         <!-- menu samping -->
         <div class="navbar-default sidebar" role="navigation">
           <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-              <li>
-                <a href="?m=awal.php">
-                  <i class="fa fa-dashboard"></i> Beranda
-                </a>
-              </li>
-              <li>
-                <a href="?m=admin&s=awal">
-                  <i class="fa fa-user"></i> Data Admin
-                </a>
-              </li>
-                            <li>
-                <a href="data_karyawan.php">
-                  <i class="fa fa-building"></i> Data Supplier
-                </a>
-              </li>
-                            <li>
-                <a href="data_karyawan.php">
-                  <i class="fa fa-cubes"></i> Data Rak
-                </a>
-              </li>
-                            <li>
-                <a href="data_karyawan.php">
-                  <i class="fa fa-shopping-cart"></i> Data Barang
-                </a>
-              </li>
-                            <li>
-                <a href="data_karyawan.php">
-                  <i class="fa fa-cart-plus"></i> Data Barang Masuk
-                </a>
-              </li>
-                            <li>
-                <a href="data_karyawan.php">
-                  <i class="fa fa-gift"></i> Data Ajuan
-                </a>
-              </li>
-                            <li>
-                <a href="data_karyawan.php">
-                  <i class="fa fa-cart-arrow-down"></i> Data Barang Keluar
-                </a>
-              </li>
+          <ul class="nav" id="side-menu">
+            <li>
+               <a href="?m=awal.php">
+                 <i class="fa fa-dashboard"></i> Beranda
+               </a>
+             </li>
+             <li>
+               <a href="?m=admin&s=awal">
+                 <i class="fa fa-user"></i> Data Admin Gudang
+               </a>
+             </li>
+             <li>
+               <a href="?m=petugas&s=awal">
+                 <i class="fa fa-users"></i> Data Petugas Gudang
+               </a>
+             </li>
+             <li>
+               <a href="?m=supplier&s=awal">
+                 <i class="fa fa-building"></i> Data Supplier
+               </a>
+             </li>
+             <li>
+               <a href="?m=rak&s=awal">
+                 <i class="fa fa-cubes"></i> Data Rak
+               </a>
+             </li>
+             <li>
+               <a href="?m=barang&s=awal">
+                 <i class="fa fa-archive"></i> Data Barang
+               </a>
+             </li>
+             <li>
+               <a href="?m=barangKeluar&s=awal">
+                 <i class="fa fa-cart-arrow-down"></i> Data Barang Keluar
+               </a>
+             </li>
+             <li>
+              <a href="?m=barangMasuk&s=awal">
+                <i class="fa fa-cart-arrow-down"></i> Data Laporan
+              </a>
+            </li>
+
               <li>
                 <a href="logout.php">
                   <i class="fa fa-warning"></i> Logout
@@ -119,134 +120,13 @@
       <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h1 class="page-header">Data Barang Masuk</h1>
+            <h1 class="page-header">Laporan Data Barang Masuk</h1>
           </div>
         </div>
 
         <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Tambah data
-</button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah barang masuk</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="?m=barangMasuk&s=simpan" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-    <label for="exampleInputEmail1">Tanggal</label>
-    <input type="text" class="form-control" value="<?php echo $tanggalSekarang; ?>" id="exampleInputEmail1" name="tanggal" aria-describedby="emailHelp" placeholder="Masukkan Tanggal">
-    <small id="emailHelp" class="form-text text-muted">Masukkan Tanggal</small>
-  </div>
-          <div class="form-group">
-    <label for="exampleInputEmail1">No. Invoice</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" name="noinv" aria-describedby="emailHelp" placeholder="Masukkan Nomor Invoice">
-    <small id="emailHelp" class="form-text text-muted">Masukkan Nomor Invoice</small>
-  </div>
-          <div class="form-group">
-    <label for="exampleInputEmail1">Supplier</label>
-    <select class="form-control" name="supplier" required="">
-   <?php 
-
-    include '../koneksi.php';
-
-    $sql = "SELECT * FROM tb_sup";
-
-    $hasil = mysqli_query($koneksi, $sql);
-
-                                                
-
-    while ($data = mysqli_fetch_array($hasil)) {
-                                                    
-                                                
-                                                
-
-      ?>
-   
-      <option value="<?php echo $data['nama_sup'];?>"><?php echo $data['nama_sup']; ?></option>
-      <?php } ?>
-                                                   
-      </select>
-  </div>
-          <div class="form-group">
-    <label for="exampleInputEmail1">Kode Barang</label>
-    
-    <?php 
-            include ("../koneksi.php");
-            $supp = ("SELECT * FROM tb_barang");
-            $result = mysqli_query($koneksi, $supp);
-
-            $jsArray = "var prdName = new Array();";
-
-            echo '<select name="kode_brg" onchange="changeValue(this.value)">';
-            echo '<option>--- PILIH ---</option>';
-
-            while ($row = mysqli_fetch_array($result)) {
-              echo '<option value="'. $row['kode_brg'] .'">KDB'.$row['kode_brg'].'</option>';
-              $jsArray .= "prdName['". $row['kode_brg'] ."'] 
-              = {nama_brg:'". addslashes($row['nama_brg']) ."',
-                stok:'". addslashes($row['stok']) ."', supplier:'". addslashes($row['supplier']) ."'
-              };";
-            }
-
-
-            echo '</select>';
-          ?>
-          <script type="text/javascript">
-            <?php echo $jsArray; ?>
-            function changeValue(id){
-              
-              document.getElementById('prd_nmbrg').value = prdName[id].nama_brg;
-              document.getElementById('prd_stk').value = prdName[id].stok;
-               document.getElementById('prd_sup').value = prdName[id].supplier;
-            }
-          </script>
-          
-  </div>
-          <div class="form-group">
-    <label for="exampleInputEmail1">Nama Barang</label>
-    <input type="text" name="nama_brg" readonly="" id="prd_nmbrg" size="67">
-
-  </div>
-          <div class="form-group">
-    <label for="exampleInputEmail1">Stok</label>
-    <input type="text" class="form-control" id="prd_stk" name="stok" aria-describedby="emailHelp" placeholder="Masukkan Stok Barang">
-
-  </div>
-          <div class="form-group">
-    <label for="exampleInputEmail1">Jumlah Masuk</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" name="jml_masuk" aria-describedby="emailHelp" placeholder="Masukkan Jumlah Masuk">
-    <small id="emailHelp" class="form-text text-muted">Masukkan Jumlah Masuk</small>
-  </div>
-          <div class="form-group">
-    <label for="exampleInputEmail1">Jam</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $jamSekarang; ?>" name="jam" aria-describedby="emailHelp" placeholder="Masukkan Jam">
-    <small id="emailHelp" class="form-text text-muted">Masukkan Jam</small>
-  </div>
-          <div class="form-group">
-    <label for="exampleInputEmail1">Admin</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" readonly="" name="petugas" aria-describedby="emailHelp" placeholder="Masukkan Nama Admin">
-    <small id="emailHelp" class="form-text text-muted">Masukkan Nama Admin</small>
-  </div>
-         
-  
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" name="simpan" class="btn btn-primary">Save changes</button>
-      </div>
-        </form>
-    </div>
-  </div>
-</div>
 
          <div class="row">
 
@@ -283,6 +163,69 @@
                                     </table>
                                     
                                 </div>
+                            </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">Laporan Ajukan</h1>
+          </div>
+        </div>
+
+        <!-- Button trigger modal -->
+
+<!-- Modal -->
+
+                          <div class="row">
+                          <div class="table-responsive table--no-card m-b-30">
+           <table class="table table-borderless table-striped table-earning">
+             <thead>
+               <tr>
+
+                 <th>No Ajuan</th>
+                 <th>Tanggal</th>
+                 <th>Periode</th>
+                 <th>Kode Barang</th>
+                 <th>Nama Barang</th>
+                 <th>Stok</th>
+                 <th>Jumlah Ajuan</th>
+                 <th>petugas</th>
+                 <th>Val</th>
+
+
+                 <th>Aksi</th>
+
+               </tr>
+             </thead>
+             <tbody>
+
+               <?php
+
+                include 'paging2.php';
+
+                ?>
+             </tbody>
+           </table>
+           <center>
+             <ul class="pagination justify-content-center">
+               <li class="page-item">
+                 <a class="page-link" <?php if ($halaman > 1) {
+                                        echo "href='?m=ajuan&s=awal&halaman=$previous'";
+                                      } ?>>Previous</a>
+               </li>
+               <?php
+                for ($x = 1; $x <= $total_halaman; $x++) {
+                ?>
+                 <li class="page-item"><a class="page-link" href="?m=ajuan&s=awal&halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+               <?php
+                }
+                ?>
+               <li class="page-item">
+                 <a class="page-link" <?php if ($halaman < $total_halaman) {
+                                        echo "href='?m=ajuan&s=awal&halaman=$next'";
+                                      } ?>>Next</a>
+               </li>
+             </ul>
+           </center>
+         </div>
                             </div>
 
 
